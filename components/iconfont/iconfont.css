@@ -1,0 +1,235 @@
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'iconfont';  /* Project id 4057626 */
+  src: url('//at.alicdn.com/t/c/font_4057626_22t9z0k1vge.woff2?t=1686719819758') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4057626_22t9z0k1vge.woff?t=1686719819758') format('woff'),
+       url('//at.alicdn.com/t/c/font_4057626_22t9z0k1vge.ttf?t=1686719819758') format('truetype');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-recmd,
+.icon-fm,
+.icon-rank,
+.icon-list,
+.icon-more,
+.icon-micphone {
+	vertical-align: top;
+  font-size: 30px;
+  color: #eee;
+}
+
+.icon-QRcode {
+	position: absolute;
+	right: 18px;
+	
+	vertical-align: middle;
+	font-size: 24px;
+}
+
+.icon-message,
+.icon-shopping,
+.icon-settings,
+.icon-night,
+.icon-alarm,
+.icon-timer,
+.icon-theme,
+.icon-download,
+.icon-youth,
+.icon-service,
+.icon-about {
+	margin: 0 10px;
+	font-size: 24px;
+}
+
+.icon-playall {
+	color: #f00;
+}
+.icon-share:before {
+  content: "\e620";
+}
+
+.icon-downmusic:before {
+  content: "\e6b7";
+}
+
+.icon-mv:before {
+  content: "\e601";
+}
+
+.icon-select:before {
+  content: "\ea84";
+}
+
+.icon-showlist:before {
+  content: "\ea86";
+}
+
+.icon-comment:before {
+  content: "\e61a";
+}
+
+.icon-collect:before {
+  content: "\e61f";
+}
+
+.icon-playall:before {
+  content: "\e75f";
+}
+
+.icon-pause:before {
+  content: "\e60a";
+}
+
+.icon-play:before {
+  content: "\e66e";
+}
+
+.icon-back:before {
+  content: "\e697";
+}
+
+.icon-add:before {
+  content: "\e623";
+}
+
+.icon-detail:before {
+  content: "\e61e";
+}
+
+.icon-like:before {
+  content: "\ff39";
+}
+
+.icon-search:before {
+  content: "\eafe";
+}
+
+.icon-about:before {
+  content: "\e614";
+}
+
+.icon-youth:before {
+  content: "\e646";
+}
+
+.icon-night:before {
+  content: "\e66b";
+}
+
+.icon-theme:before {
+  content: "\e653";
+}
+
+.icon-timer:before {
+  content: "\e75e";
+}
+
+.icon-shopping:before {
+  content: "\e62b";
+}
+
+.icon-service:before {
+  content: "\ec2e";
+}
+
+.icon-message:before {
+  content: "\e7d8";
+}
+
+.icon-settings:before {
+  content: "\e8b7";
+}
+
+.icon-alarm:before {
+  content: "\e6ba";
+}
+
+.icon-download:before {
+  content: "\e63c";
+}
+
+.icon-QRcode:before {
+  content: "\e649";
+}
+
+.icon-indexslc:before {
+  content: "\eaff";
+}
+
+.icon-loginslc:before {
+  content: "\eb00";
+}
+
+.icon-myslc:before {
+  content: "\eb01";
+}
+
+.icon-more:before {
+  content: "\e600";
+}
+
+.icon-recmd:before {
+  content: "\e602";
+}
+
+.icon-login:before {
+  content: "\e6cf";
+}
+
+.icon-rank:before {
+  content: "\e8b3";
+}
+
+.icon-fm:before {
+  content: "\e636";
+}
+
+.icon-list:before {
+  content: "\e637";
+}
+
+.icon-my:before {
+  content: "\e732";
+}
+
+.icon-micphone:before {
+  content: "\e619";
+}
+
+.icon-right:before {
+  content: "\e622";
+}
+
+.icon-index:before {
+  content: "\e60b";
+}
+
+.icon-random:before {
+	content: "\f1f8";
+}
+
+.icon-loop:before {
+	content: "\e61b";
+}
+
+.icon-singleloop:before {
+	content: "\e603";
+}
+
+.icon-last:before {
+	content: "\e635";
+}
+
+.icon-next:before {
+	content: "\e604";
+}
+
+.icon-playcount:before {
+	content: '\e65c';
+}

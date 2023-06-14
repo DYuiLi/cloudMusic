@@ -1,0 +1,1 @@
+<view wx:if="{{a}}" class="{{['shortcut', h && 'bottom']}}"><view class="music"><image src="{{b}}"></image></view><text class="song-name" bindtap="{{e}}">{{c}} - {{d}}</text><view bindtap="{{g}}"><text wx:if="{{f}}" class="iconfont icon-play"></text><text wx:else class="iconfont icon-pause"></text></view><text class="iconfont icon-showlist"></text></view>

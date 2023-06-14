@@ -1,0 +1,85 @@
+{
+	//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [ 
+		{
+			"path": "pages/index/index",
+			"style": 
+			{
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/my/my",
+			"style" :                                                                                    
+			{
+				"navigationStyle": "custom"
+			}		
+		},
+		{
+			"path" : "pages/login/login",
+			"style" :                                                                                    
+			{
+				"navigationStyle": "custom"
+			}	
+		},
+		{
+			"path": "pages/rank/rank",
+			"style": 
+			{
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/search/search",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": ""
+			}	
+		},
+		{
+			"path" : "pages/rank-list-deail/rank-list-deail",
+			"style" :                                                                                    
+			{
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/play/play",
+			"style" :                                                                                    
+			{
+				"navigationStyle": "custom"
+			}
+		}
+  ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"backgroundColor": "#fff",
+		"selectedColor": "#f00",
+		"list": [
+			{
+				"text": "发现",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/iconfont/index.png",
+				"selectedIconPath": "static/iconfont/indexslc.png"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/my/my",
+				"iconPath": "static/iconfont/my.png",
+				"selectedIconPath": "static/iconfont/myslc.png"
+			},
+			{
+				"text": "登录",
+				"pagePath": "pages/login/login",
+				"iconPath": "static/iconfont/login.png",
+				"selectedIconPath": "static/iconfont/loginslc.png"
+			}
+		]
+	}
+}

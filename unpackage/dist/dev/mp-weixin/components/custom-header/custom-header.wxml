@@ -1,0 +1,1 @@
+<view class="miniP"></view><view class="container"><block wx:if="{{$slots.d}}"><slot></slot></block><block wx:else><text class="iconfont icon-more header" bindtap="{{a}}"></text></block><slot name="body"></slot><slot name="foot"></slot></view>
