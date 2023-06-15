@@ -30,7 +30,7 @@
 	import { toRefs, toRef, computed, ref, reactive, onMounted, provide } from 'vue';
 	import { onLoad, onUnload, onReady } from '@dcloudio/uni-app';
 	import { useStore} from 'vuex';
-	import { timeFormat } from '@/common/util.js';
+	import { getSessionInfo, timeFormat } from '@/common/util.js';
 
 	const store = useStore();
 	
@@ -125,6 +125,9 @@
 		if(offset < 0) offset = 0;
 		if(offset > maxOffset) offset = maxOffset;
 		doms.ctnrObj[0].style.transform = `translateY(-${offset}px)`;
+		
+		// 当前歌曲播放结束，自动切换下一首
+		if(audioContext.currentTime == audioContext.duration) switchSong(1, getSessionInfo('songInfo').id);
 	});
 	// 获取当前滚动选中的歌词序列
 	function getIndex() {
