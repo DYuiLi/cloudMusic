@@ -1,5 +1,5 @@
 # 网易云音乐APP
-uni-app搭建的移动端音乐APP，使用vue3实现，可在H5平台上运行，该项目包含的功能为：
+uni-app搭建的移动端音乐APP，使用vue3实现，可在H5平台上运行，该项目包含的功能有：
 1. 首页推荐歌曲和推荐歌单分类
 2. 排行榜歌单分类
 3. 歌单详情
@@ -19,7 +19,7 @@ uni-app搭建的移动端音乐APP，使用vue3实现，可在H5平台上运行�
 
 待优化：
 1. 微信小程序平台兼容问题
-2. play-shortcut同步刷新当前歌曲
+2. play-shortcut同步刷新当前播放
 3. ...
 
 ## 参考来源
@@ -32,7 +32,7 @@ uni前端(**vue2**):
 [kuishou68/neteaseMusic](https://github.com/kuishou68/neteaseMusic)
 
 ## 效果展示
-| img | img | img |
+| image | image | image |
 | ---- | ---- | ---- |
 | ![image](https://github.com/DYuiLi/cloudMusic/assets/125005336/d41e606f-39e3-4190-9bcf-226e5a91b309)| ![image](https://github.com/DYuiLi/cloudMusic/assets/125005336/311d785a-4932-4f6e-8560-419559e567dc) | ![image](https://github.com/DYuiLi/cloudMusic/assets/125005336/24ec5a14-d89a-496d-8baa-5a3c727deff5) |
 | ![image](https://github.com/DYuiLi/cloudMusic/assets/125005336/3e3e3b51-8c0e-4ede-af66-219ba73c4176) | ![1686813604445](https://github.com/DYuiLi/cloudMusic/assets/125005336/e5aa0a0b-6486-419e-8566-a08200176bd5) | ![1686813614513](https://github.com/DYuiLi/cloudMusic/assets/125005336/d5e8f9da-45f1-4efb-a871-bef7b3c2badf) |

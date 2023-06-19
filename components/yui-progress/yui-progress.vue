@@ -14,8 +14,8 @@
 </template>
 
 <script setup>
-	import {  computed, onMounted, ref, toRef } from "vue";
-	import { onLoad, onReady } from "@dcloudio/uni-app"
+	import {  onMounted, ref } from "vue";
+	// import { onLoad, onReady } from "@dcloudio/uni-app"
 
 	/* 组件间通信 emits、props */
 	const emits = defineEmits(['progress']);

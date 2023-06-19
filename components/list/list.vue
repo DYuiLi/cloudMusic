@@ -1,4 +1,5 @@
 <template>
+	<!-- 自定义封装列表组件(uni-list) -->
 	<view class="list">
 		<view class="list-head">
 			

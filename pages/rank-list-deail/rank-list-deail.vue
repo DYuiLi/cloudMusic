@@ -1,5 +1,4 @@
 <template>
-	<!-- :style="backgroundImage: `url(${})`" -->
 	<view class="list-detail" :style="{backgroundImage: `url(${rankList.coverImgUrl})`}">
 		<!-- 页面头部组件 -->
 		<rank-header class="header" :opacity="opacity" :pageName="{name:rankList.name}"></rank-header>
@@ -11,14 +10,14 @@
 					<image :src="listAvatar.avatarUrl"></image>
 					<text>{{ listAvatar.nickname }}</text>
 				</view>
-				<text class="des">{{ rankList.description}}</text>
+				<text class="des">{{ rankList.description }}</text>
 			</view>
 		</view>
 		<!-- 收藏、分享、评论数量 -->
 		<view class="hot">
 			<text class="iconfont icon-collect">{{ hot[0] }}</text>
 			<text class="iconfont icon-comment">{{ hot[1] }}</text>
-			<text class="iconfont icon-share"> {{ hot[2] }}</text>
+			<text class="iconfont icon-share">{{ hot[2] }}</text>
 		</view>
 		<!-- 单曲展示 -->
 		<view class="list">
@@ -32,8 +31,9 @@
 				<text class="iconfont icon-downmusic"></text>
 				<text class="iconfont icon-select"></text>
 			</view>
+			<!-- 歌曲展示 -->
 			<view class="songs" v-for="(song, index) in songs" :key="song.id" @click="playMusic(song.id)">
-				<text>{{index + 1 }}</text>
+				<text>{{ index + 1 }}</text>
 				<view class="song-info">
 					<text>{{ song.name }}</text>
 					<text>{{ singer(song.ar) }}</text>
@@ -51,8 +51,8 @@
 <script setup>
 	import { onLoad } from '@dcloudio/uni-app';
 	import { useStore } from 'vuex';
-	import { computed, getCurrentInstance, onMounted, ref, toRefs } from "vue";
-	import { singer, goListDetail, getHot } from '@/common/util.js'	
+	import { computed, onMounted, ref, toRefs } from "vue";
+	import { singer, getHot } from '@/common/util.js'	
 	
 	const store = useStore();
 	
@@ -159,7 +159,7 @@
 			justify-content: center;
 			align-items: center;
 			position: relative;
-			width: 200px;
+			width: 230px;
 			height: 38px;
 			margin: 0 auto;
 			border-radius: 20px;

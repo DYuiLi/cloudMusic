@@ -11,7 +11,7 @@
 			</view>
 			<view class="right"></view>
 		</view>
-		<!-- 导航啦 -->
+		<!-- 导航栏 -->
 		<slot name="nav"></slot>
 	</view>
 </template>

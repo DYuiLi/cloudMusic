@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref, toRefs } from "vue";
+import { reactive, ref } from "vue";
 import { getSessionInfo } from "@/common/util.js";
 
 	// 获取缓存歌曲信息

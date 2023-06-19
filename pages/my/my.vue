@@ -1,18 +1,5 @@
 <template>
 	<view class="my">
-		<!-- 自定义list -->
-		<!-- <uni-list class="list" :border="false">
-			<uni-list-item class="item" title="Come and get your love" note="Yui">
-				<template v-slot:header>
-					<image src="@/static/logo.png"></image>
-				</template>
-			</uni-list-item>
-			<uni-list-item class="item" title="As long as you love me" note="Biber">
-				<template v-slot:header>
-					<image src="@/static/iconfont/myslc.png"></image>
-				</template>
-			</uni-list-item>
-		</uni-list> -->
 		<!-- 自定义头部 -->
 		<custom-header class="cheader">
 			<template v-slot:body>
@@ -26,9 +13,7 @@
 		<view class="avatar">
 			<image src="@/static/iconfont/avatar.png"></image>
 			<view class="detail">
-				<view class="username">
-					{{ username }}
-				</view>
+				<view class="username"> {{ username }} </view>
 				<view class="info">
 					<text>7关注</text>
 					<text class="mid">4粉丝</text>

@@ -65,8 +65,8 @@
 </template>
 
 <script setup>
-	import { computed, reactive, ref, toRefs, watch } from "vue"
-	import { useStore, mapGetters } from 'vuex'
+	import { computed, reactive, ref, toRefs } from "vue"
+	import { useStore } from 'vuex'
 	import { onLoad } from "@dcloudio/uni-app"	
 	import { getSessionInfo, singer, goListDetail, getHot } from '@/common/util.js'
 	

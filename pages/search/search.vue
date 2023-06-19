@@ -1,19 +1,13 @@
 <template>
-	<view>
+	<view class="search">
 		
 	</view>
 </template>
 
-<script>
-	export default {
-		setup() {
-			return {
-				
-			};
-		}
-	}
+<script setup>
+	
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

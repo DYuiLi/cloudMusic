@@ -8,12 +8,15 @@
 			<text class="iconfont icon-share"></text>
 			<!-- <text class="iconfont icon-detail"></text> -->
 		</view>
+		<!-- 进度条信息 -->
 		<view class="pgs-container">
-			<text>{{current}}</text>
+			<text>{{ current }}</text>
 			<yui-progress class="progress" @progress="setProgress" :progress="progress"></yui-progress>
-			<text>{{duration}}</text>
+			<text>{{ duration }}</text>
 		</view>
+		<!-- 播放控件 -->
 		<view class="controls">
+			<!-- 循环方式 -->
 			<view class="loop" @click="loopMode">
 				<text class="iconfont" :class="loops[loopIndex]"></text>
 			</view>
@@ -29,7 +32,7 @@
 </template>
 
 <script setup>
-	import { computed, reactive, ref, toRef, toRefs } from "vue";
+	import { computed, ref } from "vue";
 	import { timeFormat } from '@/common/util.js'
 	import { onLoad } from '@dcloudio/uni-app';
 
@@ -45,6 +48,7 @@
 	let current = ref('00:00');				// 当前播放时刻初始值
 	let timer;												// 初始化定时器
 	let progress = ref(0);						// 进度条初始值
+	
 	onLoad(() => {
 		uni.$on('playing', (context) => {
 			play.value = true;						// 将图标播放和暂停状态与音乐同步
@@ -83,12 +87,8 @@
 	}
 	
 	/* 播放上/下一曲 */
-	function lastSong(){
-		uni.$emit('lastSong');
-	}
-	function nextSong(){
-		uni.$emit('nextSong');
-	}
+	function lastSong(){ uni.$emit('lastSong'); }
+	function nextSong(){ uni.$emit('nextSong'); }
 	
 </script>
 

@@ -75,7 +75,7 @@ export function timeFormat(time) {
 		// 通过拆分歌词得到的时间
 		time = time.replace(':', '.');
 		time = time.split('.');
-		return time[0] * 60 + time[1] * 1 + time[2] / 100;
+		return time[0] * 60 + time[1] * 1 + time[2] / 1000;
 		
 	}else if(time){
 		// 通过单曲url得到的以ms为单位的时间

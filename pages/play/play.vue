@@ -27,8 +27,8 @@
 </template>
 
 <script setup>
-	import { toRefs, toRef, computed, ref, reactive, onMounted, provide } from 'vue';
-	import { onLoad, onUnload, onReady } from '@dcloudio/uni-app';
+	import { toRefs, computed, ref } from 'vue';
+	import { onLoad, onUnload } from '@dcloudio/uni-app';
 	import { useStore} from 'vuex';
 	import { getSessionInfo, timeFormat } from '@/common/util.js';
 
@@ -47,6 +47,30 @@
 		});
 		
 		playMusic(option.id);
+		console.log("lyric:", finalLrc);
+	});
+	
+	/* 手动暂停/播放音乐 */
+	function playOrPause(play){
+		if(play){
+			audioContext.play();
+		}else{
+			audioContext.pause();																	// H5需要用户手动开启播放
+		}
+	}
+	// 根据手动设置进度条时间修改音乐当前播放时间点
+	function resetCurrentTime(current){
+		audioContext.currentTime = current;
+	}
+	
+	/* 监听音乐播放和暂时事件 */
+	audioContext.onPlay(() => {
+		rotate.value = true;											// 图片旋转
+		uni.$emit('playing', audioContext);
+	});
+	audioContext.onPause(() => {
+		rotate.value = false;
+		uni.$emit('paused');
 	});
 	
 	/* 播放音乐 & 监听事件 */
@@ -68,16 +92,6 @@
 			console.log(err);
 		});
 	} 
-	
-	/* 监听音乐播放和暂时事件 */
-	audioContext.onPlay(() => {
-		rotate.value = true;											// 图片旋转
-		uni.$emit('playing', audioContext);
-	});
-	audioContext.onPause(() => {
-		rotate.value = false;
-		uni.$emit('paused');
-	});
 	
 	/* 切换上一曲/下一曲 */
 	function switchSong(index, crtID){
@@ -119,6 +133,17 @@
 	
 	let lyricIndex = ref(0);
 	
+	// 获取当前滚动选中的歌词序列
+	function getIndex() {
+		for(let i=0; i<finalLrc.value.length-1; i++){
+			if(finalLrc.value[i].time > audioContext.currentTime){
+				 return i-1;
+			}
+		}
+		// 当没找到符合条件的i，表示改行为最后一句
+		return finalLrc.value.length - 1;
+	}
+	// 当前歌曲播放进度监听
 	audioContext.onTimeUpdate(() => {
 		lyricIndex.value = getIndex();
 		let offset= textHeight * lyricIndex.value + textHeight/2 - lrcHeight/2
@@ -129,30 +154,6 @@
 		// 当前歌曲播放结束，自动切换下一首
 		if(audioContext.currentTime == audioContext.duration) switchSong(1, getSessionInfo('songInfo').id);
 	});
-	// 获取当前滚动选中的歌词序列
-	function getIndex() {
-		const currentTime = audioContext.currentTime;
-		for(let i=0; i<finalLrc.value.length-1; i++){
-			if(finalLrc.value[i].time > currentTime){
-				 return i-1 ;
-			};
-		}
-		// 当没找到符合条件的i，表示改行为最后一句
-		return finalLrc.value.length - 1;
-	}
-	
-	/* 手动暂停/播放音乐 */
-	function playOrPause(play){
-		if(play){
-			audioContext.play();
-		}else{
-			audioContext.pause();																	// H5需要用户手动开启播放
-		}
-	}
-	// 根据手动设置进度条时间修改音乐当前播放时间点
-	function resetCurrentTime(current){
-		audioContext.currentTime = current;
-	}
 	
 	/* 接口返回的初始歌词信息, 对歌词进行拆分 */
 	const lyric = computed(() => { return store.state.rank.singleLyrics; });
@@ -235,7 +236,7 @@
 				position: absolute;
 				top: 280px;
 				width: 100%;
-				height: 120px;					// 需要通过JS计算设备屏幕高度和比例进而调整显示歌词的高度
+				height: 155px;					// 需要通过JS计算设备屏幕高度和比例进而调整显示歌词的高度
 				// height: 50%;	
 				overflow: hidden;
 				text-align: center;
@@ -268,7 +269,7 @@
 			align-items: center;
 			text-align: center;
 			position: relative;
-			height: 450px;
+			height: 440px;
 			overflow: scroll;		
 			
 			text {

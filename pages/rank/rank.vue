@@ -31,7 +31,6 @@
 						<text>{{ rank.updateFrequency}}</text>
 					</view>
 					<view class="item-info">
-						<!-- <image :src="rank.tracks[0].al.picUrl"></image> -->
 						<image :src="rank.coverImgUrl"></image>
 						<view class="song-info" >
 							<view v-for="(song, index) in rank.tracks" :key="song.id">
@@ -60,7 +59,7 @@
 	
 	onLoad((option) => {
 		store.dispatch('rank/getAllRank');
-		console.log(allRanks);
+		// console.log(allRanks);
 	});
 	
 	// 提取仓库中state的数据
