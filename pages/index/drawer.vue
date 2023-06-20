@@ -39,71 +39,56 @@
 	</div>
 </template>
 
-<script>
-
-import { onMounted, reactive, ref } from "vue";
-
-	export default {
-
-		emits: ['hide'],
-		components: {
-			// List
-		},
-
-		setup(props, context) {
-			
-			let isClose = ref(false);
-			
-			const personalList = reactive([
-				{id:1, icon: "icon-message", des: "我的消息"},
-				{id:2, icon: "icon-shopping", des: "商城"}
-			]);
-			const settingsList = reactive([
-				{id:1, icon: "icon-settings", des: "设置"},
-				{id:2, icon: "icon-night", des: "夜间模式"},
-				{id:3, icon: "icon-timer", des: "定时退出"},
-				{id:4, icon: "icon-theme", des: "个性装扮"},
-				{id:5, icon: "icon-download", des: "边听边存"},
-				{id:6, icon: "icon-youth", des: "青少年模式"},
-				{id:7, icon: "icon-alarm", des: "音乐闹钟"}
-			]);
-			const otherList = reactive([
-				{id:1, icon: "icon-service", des: "我的客服"},
-				{id:2, icon: "icon-about", des: "关于"}
-			]);
-			
-			const pageLocation = ref('');
-			function hideDrawer() {
-				isClose.value = true;
-				
-				// 恢复父组件滚动
-				document.body.style.position = 'static';
-				window.scrollTo(0, pageLocation.value);
-				
-				// 延时隐藏抽屉，展示隐藏动画效果
-				setTimeout(function(){
-					context.emit('hide');
-				},300);
-			}
-			onMounted(() => {
-				// 记录父组件滚动高度，并禁止父组件滚动
-				let scrollTop = window.scrollY;//滚动的高度；
-				pageLocation.value = scrollTop;
-				document.body.style.position = 'fixed';
-				document.body.style.top = '-' + scrollTop + 'px';
-				
-			});
-			
-			return {
-				hideDrawer,
-				username: "立即登录",
-				isClose,
-				personalList,
-				settingsList,
-				otherList
-			}
-		}
+<script setup>
+	import { onMounted, reactive, ref } from "vue";
+	
+	const emits = defineEmits(['hide']);			// 自定义事件
+	
+	const personalList = reactive([
+		{id:1, icon: "icon-message", des: "我的消息"},
+		{id:2, icon: "icon-shopping", des: "商城"}
+	]);
+	const settingsList = reactive([
+		{id:1, icon: "icon-settings", des: "设置"},
+		{id:2, icon: "icon-night", des: "夜间模式"},
+		{id:3, icon: "icon-timer", des: "定时退出"},
+		{id:4, icon: "icon-theme", des: "个性装扮"},
+		{id:5, icon: "icon-download", des: "边听边存"},
+		{id:6, icon: "icon-youth", des: "青少年模式"},
+		{id:7, icon: "icon-alarm", des: "音乐闹钟"}
+	]);
+	const otherList = reactive([
+		{id:1, icon: "icon-service", des: "我的客服"},
+		{id:2, icon: "icon-about", des: "关于"}
+	]);
+	const username = "立即登录";
+	
+	/* 显示/隐藏抽屉 */
+	let isClose = ref(false);						// 抽屉展示初始状态
+	const pageLocation = ref();
+	
+	function hideDrawer() {
+		isClose.value = true;
+		
+		// 恢复父组件滚动
+		document.body.style.position = 'static';
+		window.scrollTo(0, pageLocation.value);
+		
+		// 延时隐藏抽屉，展示隐藏动画效果
+		setTimeout(function(){
+			emits('hide');
+		},300);
 	}
+	
+	onMounted(() => {
+		// 记录父组件滚动高度，并禁止父组件滚动
+		let scrollTop = window.scrollY;//滚动的高度；
+		pageLocation.value = scrollTop;
+		document.body.style.position = 'fixed';
+		document.body.style.top = '-' + scrollTop + 'px';
+		
+	});
+	
 </script>
 
 <style lang="scss">

@@ -61,6 +61,7 @@
 					<text class="iconfont icon-add"></text>
 					<text class="iconfont icon-detail"></text>
 				</view>
+				<!-- 真实数据使用list组件封装 -->
 				<view class="list-item" v-for="item in 6">
 					<view class="list-item-header">
 						<image src="../../static/logo.png" mode=""></image>
@@ -79,6 +80,7 @@
 					<text>收藏歌单(3个)</text>
 					<text class="iconfont icon-detail"></text>
 				</view>
+				<!-- 真实数据使用list组件封装 -->
 				<view class="list-item" v-for="item in 3">
 					<view class="list-item-header">
 						<image src="../../static/logo.png" mode=""></image>
@@ -86,7 +88,6 @@
 					<view class="list-item-body">
 						<text>自习室午睡半小时</text>
 						<text>95首，by xxxx</text>
-						
 					</view>
 					<view class="list-item-footer">
 						<text class="iconfont icon-detail"></text>
@@ -107,29 +108,21 @@
 	</view>
 </template>
 
-<script>
-import { reactive } from "vue";
-
-	export default {
-		setup() {
-			
-			const sorts = reactive([
-					{id: 1, des: "最近播放", icon: "icon-login"},
-					{id: 2, des: "本地/下载", icon: "icon-login"},
-					{id: 3, des: "云盘", icon: "icon-login"},
-					{id: 4, des: "已购", icon: "icon-login"},
-					{id: 5, des: "我的好友", icon: "icon-login"},
-					{id: 6, des: "收藏和赞", icon: "icon-login"},
-					{id: 7, des: "我的播客", icon: "icon-login"},
-					{id: 8, des: "乐谜团", icon: "icon-login"}
-				]);
-				
-			return {
-				username: "Yui_Lii",
-				sorts
-			};
-		}
-	}
+<script setup>
+	import { reactive, ref } from "vue";
+	
+	const sorts = reactive([
+		{id: 1, des: "最近播放", icon: "icon-login"},
+		{id: 2, des: "本地/下载", icon: "icon-login"},
+		{id: 3, des: "云盘", icon: "icon-login"},
+		{id: 4, des: "已购", icon: "icon-login"},
+		{id: 5, des: "我的好友", icon: "icon-login"},
+		{id: 6, des: "收藏和赞", icon: "icon-login"},
+		{id: 7, des: "我的播客", icon: "icon-login"},
+		{id: 8, des: "乐谜团", icon: "icon-login"}
+	]);
+	const username = ref('Yui_Lii');
+	
 </script>
 
 <style lang="scss">

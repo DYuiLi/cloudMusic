@@ -22,7 +22,8 @@
 				</view> -->
 			</view>
 		</view>
-		<play-footer :time="singleUrl.time" @resetTime="resetCurrentTime"></play-footer>
+		<PlayFooter :time="singleUrl.time" @resetTime="resetCurrentTime"></PlayFooter>
+		<!-- <play-footer :time="singleUrl.time" @resetTime="resetCurrentTime"></play-footer> -->
 	</view>
 </template>
 
@@ -31,6 +32,7 @@
 	import { onLoad, onUnload } from '@dcloudio/uni-app';
 	import { useStore} from 'vuex';
 	import { getSessionInfo, timeFormat } from '@/common/util.js';
+	import PlayFooter from '@/pages/play/play-footer.vue'
 
 	const store = useStore();
 	
@@ -47,7 +49,7 @@
 		});
 		
 		playMusic(option.id);
-		console.log("lyric:", finalLrc);
+		// console.log("lyric:", finalLrc);
 	});
 	
 	/* 手动暂停/播放音乐 */

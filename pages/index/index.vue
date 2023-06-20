@@ -45,30 +45,25 @@
 				<text>推荐歌曲</text>
 				<text class="iconfont icon-right"></text>
 			</view>
-			<uni-list :border="false">
-				<!-- singer需要拼串儿 -->
-				<uni-list-item v-for="song in recmdSongSlight" :key="song.id" clickable
-					:title="song.name"
-					:thumb="song.picUrl"
-					thumbSize="lg"
-					:note="singer(song.singer)"
-					@click.native="playMusic(song.id)">
-				</uni-list-item>
-			</uni-list>
+			<view class="songlist">
+				<list v-for="song in recmdSongSlight" :key="song.id" :src="song.picUrl" :title="song.name" 
+				 :content="singer(song.singer)" @click.native="playMusic(song.id)"/>
+			</view>
 		</view>
 		<!-- 抽屉 -->
 		<!-- #ifndef MP-WEIXIN -->
-		<drawer v-if="showDrawer" @hide="hideDrawer" />
+		<Drawer v-if="showDrawer" @hide="hideDrawer"/>
 		<!-- #endif -->
 		<play-shortcut v-if="songInfo"></play-shortcut>
 	</view>
 </template>
 
 <script setup>
-	import { computed, reactive, ref, toRefs } from "vue"
-	import { useStore } from 'vuex'
-	import { onLoad } from "@dcloudio/uni-app"	
-	import { getSessionInfo, singer, goListDetail, getHot } from '@/common/util.js'
+	import { computed, reactive, ref, toRefs } from "vue";
+	import { useStore } from 'vuex';
+	import { onLoad } from "@dcloudio/uni-app";
+	import { getSessionInfo, singer, goListDetail, getHot } from '@/common/util.js';
+	import Drawer from '@/pages/index/drawer.vue';
 	
 	const store = useStore();
 	
@@ -261,10 +256,11 @@
 				margin-bottom: 10px;
 			}
 
-			list {
-				list-item {
-					width: 100%;
-					height: 30px;
+			.songlist {
+				padding: 0 5px;
+				.list {
+					padding-bottom: 5px;
+					// border-bottom: #eee solid 0.5px;
 				}
 			}
 		}

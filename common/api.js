@@ -15,7 +15,7 @@ export const reqRecmdList = () => {
 
 // 首页-获取推荐歌曲
 export const reqRecmdSong = () => {
-	return apiRequest({ url: "personalized/newsong?limit=5", method: "GET"});
+	return apiRequest({ url: "personalized/newsong?limit=7", method: "GET"});
 }
 
 // 排行榜-获取榜单推荐

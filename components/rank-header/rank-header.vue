@@ -6,8 +6,8 @@
 				<text class="iconfont icon-back" @click="goBack"></text>
 			</view>
 			<view class="body">
-				<text class="title">{{pageName.name}}</text>
-				<text class="subtitle" v-if="pageName.singer">{{pageName.singer}}</text>
+				<text class="title">{{ pageName.name }}</text>
+				<text class="subtitle" v-if="pageName.singer">{{ pageName.singer }}</text>
 			</view>
 			<view class="right"></view>
 		</view>
