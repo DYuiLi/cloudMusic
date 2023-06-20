@@ -4,24 +4,31 @@
 const baseUrl = "http://localhost:3000/";
 
 function requests(options = {}){
-	options.url = baseUrl + options.url,
-	options.method = options.method || 'GET',
+	// 请求拦截器
+	options.url = baseUrl + options.url;
+	options.method = options.method || 'GET';
 	// 设置请求头
 	options.header = {
 		//appid: ""			// 前后端交互的token
 	}
 	
 	return new Promise((resolve, reject) => {
-		
+		// 请求成功，返回结果
 		options.success = (res) => {
-			// console.log(res);
-			resolve(res.data);
-			// if(res.statusCode === 200){
-			// 	resolve(res);
-			// }else{
-			// 	reject(res);
-			// }
+			// 响应拦截器
+			switch(res.statusCode){
+				case 200:
+					resolve(res.data);		// 返回正确数据
+					break;
+				case 401:       // 权限问题，比如未登录
+					break;
+				case 403:       // 服务器接受请求，但拒绝执行，例如token过期
+					break;
+				case 404:       // 找不到页面
+					break;
+			}
 		}
+		// 请求失败
 		options.fail = (err) => {
 			reject(err);
 		}
@@ -35,44 +42,3 @@ function requests(options = {}){
 }
 
 export default requests;
-/*
-export default {
-	config: {
-		beforeRequest(options = {}){
-			return new Promise((resolve, reject) => {
-				options.url = baseUrl + options.url,
-				options.method = options.method || 'GET',
-				// 设置请求头
-				options.header = {
-					appid: ""			// 前后端交互的token
-				}
-				resolve(options);
-			});
-		}
-	},
-	request(options = {}){
-		return this.config.beforeRequest(options).then(opt => {
-			return uni.request(opt);
-		});
-	}
-}
-
-
-request = function(options){
-	return new Promise((resolve, reject) => {
-		uni.request({
-			url: baseUrl + options.url,
-			method: options.method || 'GET',
-			data: options.data || {},
-			dataType: options.dataType || 'json',
-			success: res => {
-				resolve(res.data)
-			},
-			fail: (err) => {
-				reject(err)
-			},
-			complete: () => {}
-		});
-	})
-}
-*/
