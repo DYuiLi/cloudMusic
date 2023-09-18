@@ -48,5 +48,5 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/components/yui-progress/yui-progress.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/UniApp/cloudMusic/cloudMusicApp/components/yui-progress/yui-progress.vue"]]);
 wx.createComponent(Component);

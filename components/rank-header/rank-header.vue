@@ -36,12 +36,16 @@
 </script>
 
 <style lang="scss" scoped>
+	
 	.nav {
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 999;
+		/* #ifdef MP */
+		background-color: inherit;
+		/* #endif */
 		// border-bottom: #999 solid 0.1px;
 		padding: 10px 15px 0;
 

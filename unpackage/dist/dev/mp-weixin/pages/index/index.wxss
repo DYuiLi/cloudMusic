@@ -23,14 +23,32 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+body.data-v-1cf27b2a {
+  background-color: #eee;
+}
+/* ----------- 具体公共样式函数 -----------*/
+/* 模糊背景 */
+.blur-bg.data-v-1cf27b2a {
+  position: fixed;
+  padding: 50px 0;
+  width: 100%;
+  height: 570px;
+  background-size: cover;
+  background-position: center 0;
+  filter: blur(30px);
+  scale: 1.2;
+}
 .index.data-v-1cf27b2a {
-  padding: 80px 15px 0;
+  padding: 80px 15px 0px;
+  background-color: #fff;
+  padding: 120px 15px 0px;
 }
 .index .header.data-v-1cf27b2a {
   background-color: #fff;
 }
 .index .header input.data-v-1cf27b2a {
   width: 70%;
+  width: 95%;
   height: 30px;
   box-sizing: border-box;
   background-color: #eee;
@@ -111,9 +129,11 @@
 .index .recmdSong .title.data-v-1cf27b2a {
   margin-bottom: 10px;
 }
-.index .recmdSong list list-item.data-v-1cf27b2a {
-  width: 100%;
-  height: 30px;
+.index .recmdSong .songlist.data-v-1cf27b2a {
+  padding: 0 5px;
+}
+.index .recmdSong .songlist .list.data-v-1cf27b2a {
+  padding-bottom: 5px;
 }
 .indexBottom.data-v-1cf27b2a {
   padding-bottom: 50px;

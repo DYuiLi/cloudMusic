@@ -21,7 +21,7 @@
 						<text class="iconfont" :class="set.icon"></text>
 						<text>{{ set.des }}</text>
 						<text v-if="set.id !== 2" class="iconfont icon-right right"></text>
-						<switch v-else color="#f55" @change="" />
+						<switch v-else color="#f55" @change="nightMode" />
 					</li>
 				</ul>
 			</view>	
@@ -79,6 +79,10 @@
 			emits('hide');
 		},300);
 	}
+	/* 切换夜间模式 */
+	function nightMode(event){
+		console.log(event.detail.value);
+	}
 	
 	onMounted(() => {
 		// 记录父组件滚动高度，并禁止父组件滚动
@@ -92,6 +96,8 @@
 </script>
 
 <style lang="scss">
+	@import '@/common/common.scss';
+	
 	.drawer {										/* 遮罩层 */
 		position: fixed;
 		z-index: 9999;
@@ -112,6 +118,7 @@
 			width: 80%;
 			// height: 100%;
 			background-color: #f5f5f5;
+			// background-color: #333;
 			padding: 20px;
 
 			.profile {
@@ -139,10 +146,12 @@
 					list-style: none;
 					border-radius: 15px;
 					background-color: #fff;
+					// background-color: #666;
 					padding: 0;		/* 取消disc所占的位置 */
 					box-shadow: 0 0 5px #ccc;
 					li {
 						height: 45px;
+						// border-bottom: #333 solid 0.1px;
 						border-bottom: #eee solid 0.1px;
 						line-height: 45px;
 						font-size: 14px;

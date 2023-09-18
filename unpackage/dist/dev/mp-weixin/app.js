@@ -17,10 +17,14 @@ if (!Math) {
   "./pages/play/play.js";
 }
 const _sfc_main = {
-  setup() {
+  __name: "App",
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return {};
+    };
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/UniApp/cloudMusic/cloudMusicApp/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   app.use(store_index.store);

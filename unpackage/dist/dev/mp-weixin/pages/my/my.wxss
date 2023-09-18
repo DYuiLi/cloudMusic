@@ -23,6 +23,21 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+body {
+  background-color: #eee;
+}
+/* ----------- 具体公共样式函数 -----------*/
+/* 模糊背景 */
+.blur-bg {
+  position: fixed;
+  padding: 50px 0;
+  width: 100%;
+  height: 570px;
+  background-size: cover;
+  background-position: center 0;
+  filter: blur(30px);
+  scale: 1.2;
+}
 .my .lists-create .list-item-header, .my .lists-collect .list-item-header, .my .lists-assist .list-item-header, .my .iLike-header {
   padding-top: 3px;
 }

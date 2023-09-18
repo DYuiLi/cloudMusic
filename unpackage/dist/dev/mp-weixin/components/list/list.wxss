@@ -23,32 +23,46 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.uni-list {
+.list-head.data-v-18578b00 {
+  padding-top: 3px;
+}
+.list-head image.data-v-18578b00 {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+.list-body.data-v-18578b00 {
+  width: 75%;
+}
+.list-body text.data-v-18578b00 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+  height: 22px;
+  line-height: 22px;
+  display: block;
+}
+.list-body text.data-v-18578b00:last-child {
+  font-size: 12px;
+  color: #666;
+}
+.list-foot.data-v-18578b00 {
+  padding: 0 5px 5px;
+  border: #ddd solid 0.5px;
+  border-radius: 15px;
+}
+.list-foot text.data-v-18578b00 {
+  font-size: 12px;
+  color: #333;
+  vertical-align: middle;
+}
+.list-foot text.data-v-18578b00:first-child {
+  font-size: 16px;
+}
+.list.data-v-18578b00 {
   display: flex;
-  background-color: #ffffff;
-  position: relative;
-  flex-direction: column;
-}
-.uni-list--border {
-  position: relative;
-  z-index: -1;
-}
-.uni-list--border-top {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 1px;
-  transform: scaleY(0.5);
-  background-color: #e5e5e5;
-  z-index: 1;
-}
-.uni-list--border-bottom {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 1px;
-  transform: scaleY(0.5);
-  background-color: #e5e5e5;
+  align-items: center;
+  height: 50px;
 }

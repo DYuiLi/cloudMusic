@@ -68,7 +68,8 @@
 	let scrollTop = ref(0);				// 页面滚动高度初始值
 	onMounted(() => {
 		// 监听页面滚动事件，用于切换导航栏分类标签的展示状态
-		window.addEventListener('scroll', () => {
+		// #ifndef MP		
+		window.addEventListener('scroll', () => {		// 微信小程序不支持addEventListener
 			let top = document.documentElement.scrollTop;
 			switch(top){
 				case top > 225:
@@ -79,7 +80,9 @@
 					break;
 			}
 		}, true);
-	})
+		// #endif
+		
+	});
 	
 	/* 点击定位排行榜歌单分类 */
 	function scrollTo(index) {

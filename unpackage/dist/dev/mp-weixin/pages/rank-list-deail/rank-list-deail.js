@@ -23,12 +23,10 @@ const _sfc_main = {
       return common_util.getHot([data.subscribedCount, data.commentCount, data.shareCount]);
     });
     const opacity = common_vendor.ref(0);
-    common_vendor.onMounted(() => {
-      window.addEventListener("scroll", () => {
-        opacity.value = document.documentElement.scrollTop / 200;
-        if (opacity.value > 1)
-          opacity.value = 1;
-      }, true);
+    common_vendor.onPageScroll(({ scrollTop }) => {
+      opacity.value = scrollTop / 200;
+      if (opacity.value > 1)
+        opacity.value = 1;
     });
     const { rankList } = common_vendor.toRefs(store.state.rank);
     const listAvatar = common_vendor.computed(() => {
@@ -44,21 +42,22 @@ const _sfc_main = {
     }
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.p({
+        a: `url(${common_vendor.unref(rankList).coverImgUrl})`,
+        b: common_vendor.p({
           opacity: opacity.value,
           pageName: {
             name: common_vendor.unref(rankList).name
           }
         }),
-        b: common_vendor.unref(rankList).coverImgUrl,
-        c: common_vendor.unref(listAvatar).avatarUrl,
-        d: common_vendor.t(common_vendor.unref(listAvatar).nickname),
-        e: common_vendor.t(common_vendor.unref(rankList).description),
-        f: common_vendor.t(common_vendor.unref(hot)[0]),
-        g: common_vendor.t(common_vendor.unref(hot)[1]),
-        h: common_vendor.t(common_vendor.unref(hot)[2]),
-        i: common_vendor.t(common_vendor.unref(songs).length),
-        j: common_vendor.f(common_vendor.unref(songs), (song, index, i0) => {
+        c: common_vendor.unref(rankList).coverImgUrl,
+        d: common_vendor.unref(listAvatar).avatarUrl,
+        e: common_vendor.t(common_vendor.unref(listAvatar).nickname),
+        f: common_vendor.t(common_vendor.unref(rankList).description),
+        g: common_vendor.t(common_vendor.unref(hot)[0]),
+        h: common_vendor.t(common_vendor.unref(hot)[1]),
+        i: common_vendor.t(common_vendor.unref(hot)[2]),
+        j: common_vendor.t(common_vendor.unref(songs).length),
+        k: common_vendor.f(common_vendor.unref(songs), (song, index, i0) => {
           return {
             a: common_vendor.t(index + 1),
             b: common_vendor.t(song.name),
@@ -67,11 +66,11 @@ const _sfc_main = {
             e: song.id,
             f: common_vendor.o(($event) => playMusic(song.id), song.id)
           };
-        }),
-        k: `url(${common_vendor.unref(rankList).coverImgUrl})`
+        })
       };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-3c078acc"], ["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/pages/rank-list-deail/rank-list-deail.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-3c078acc"], ["__file", "E:/UniApp/cloudMusic/cloudMusicApp/pages/rank-list-deail/rank-list-deail.vue"]]);
+_sfc_main.__runtimeHooks = 1;
 wx.createPage(MiniProgramPage);

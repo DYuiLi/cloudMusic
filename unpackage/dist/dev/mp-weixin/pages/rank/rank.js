@@ -18,19 +18,10 @@ const _sfc_main = {
     const store = common_vendor.useStore();
     common_vendor.onLoad((option) => {
       store.dispatch("rank/getAllRank");
-      console.log(allRanks);
     });
-    const { allRanks, rankList } = common_vendor.toRefs(store.state.rank);
+    common_vendor.toRefs(store.state.rank);
     let scrollTop = common_vendor.ref(0);
     common_vendor.onMounted(() => {
-      window.addEventListener("scroll", () => {
-        let top = document.documentElement.scrollTop;
-        switch (top) {
-          case top > 225:
-            scrollTop.value = 1;
-            break;
-        }
-      }, true);
     });
     function scrollTo(index) {
       switch (index) {
@@ -108,5 +99,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-716fbf2c"], ["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/pages/rank/rank.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-716fbf2c"], ["__file", "E:/UniApp/cloudMusic/cloudMusicApp/pages/rank/rank.vue"]]);
 wx.createPage(MiniProgramPage);

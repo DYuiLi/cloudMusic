@@ -15,12 +15,10 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    },
-    "condition": false,
-    "enhance": true
+    }
   },
   "compileType": "miniprogram",
-  "libVersion": "2.31.1",
+  "libVersion": "",
   "appid": "wx10641aa8be693dbd",
   "projectname": "cloudMusicApp",
   "condition": {},

@@ -2,15 +2,21 @@
 const common_vendor = require("./vendor.js");
 common_vendor.ref(false);
 function setSessionInfo(item, value) {
-  sessionStorage.setItem(item, JSON.stringify(value));
-  console.log(item, value);
   common_vendor.wx$1.setStorage({
     key: item,
-    data: value
+    data: value,
+    success() {
+      console.log("data saved successfully!");
+    }
   });
 }
 function getSessionInfo(item) {
-  return common_vendor.wx$1.getStorage({ key: item });
+  common_vendor.wx$1.getStorage({
+    key: item,
+    success(res) {
+      return res.data;
+    }
+  });
 }
 function singer(list) {
   let singer2;
@@ -31,7 +37,7 @@ function timeFormat(time) {
   if (time && typeof time === "string") {
     time = time.replace(":", ".");
     time = time.split(".");
-    return time[0] * 60 + time[1] * 1 + time[2] / 100;
+    return time[0] * 60 + time[1] * 1 + time[2] / 1e3;
   } else if (time) {
     time = parseInt(time / 1e3);
     const min = parseInt(time / 60);

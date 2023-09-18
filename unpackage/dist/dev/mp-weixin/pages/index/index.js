@@ -3,17 +3,13 @@ const common_vendor = require("../../common/vendor.js");
 const common_util = require("../../common/util.js");
 if (!Array) {
   const _easycom_custom_header2 = common_vendor.resolveComponent("custom-header");
-  const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
-  const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
-  const _easycom_play_shortcut2 = common_vendor.resolveComponent("play-shortcut");
-  (_easycom_custom_header2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_play_shortcut2)();
+  const _easycom_list2 = common_vendor.resolveComponent("list");
+  (_easycom_custom_header2 + _easycom_list2)();
 }
 const _easycom_custom_header = () => "../../components/custom-header/custom-header.js";
-const _easycom_uni_list_item = () => "../../uni_modules/uni-list/components/uni-list-item/uni-list-item.js";
-const _easycom_uni_list = () => "../../uni_modules/uni-list/components/uni-list/uni-list.js";
-const _easycom_play_shortcut = () => "../../components/play-shortcut/play-shortcut.js";
+const _easycom_list = () => "../../components/list/list.js";
 if (!Math) {
-  (_easycom_custom_header + _easycom_uni_list_item + _easycom_uni_list + _easycom_play_shortcut)();
+  (_easycom_custom_header + _easycom_list)();
 }
 const _sfc_main = {
   __name: "index",
@@ -60,10 +56,7 @@ const _sfc_main = {
         des: "歌单"
       }
     ]);
-    let showDrawer = common_vendor.ref(false);
-    function showMore() {
-      showDrawer.value = true;
-    }
+    let isShowDrawer = common_vendor.ref(false);
     function rankList() {
       common_vendor.index.navigateTo({
         url: "/pages/rank/rank?page=排行榜"
@@ -86,8 +79,8 @@ const _sfc_main = {
       }
     }
     return (_ctx, _cache) => {
-      return common_vendor.e({
-        a: common_vendor.o(showMore),
+      return {
+        a: common_vendor.o(($event) => common_vendor.isRef(isShowDrawer) ? isShowDrawer.value = !common_vendor.unref(isShowDrawer) : isShowDrawer = !common_vendor.unref(isShowDrawer)),
         b: common_vendor.f(common_vendor.unref(banner), (slide, index, i0) => {
           return {
             a: slide.imageUrl,
@@ -115,25 +108,18 @@ const _sfc_main = {
           return {
             a: song.id,
             b: common_vendor.o(($event) => playMusic(song.id), song.id),
-            c: "1cf27b2a-2-" + i0 + ",1cf27b2a-1",
+            c: "1cf27b2a-1-" + i0,
             d: common_vendor.p({
-              clickable: true,
+              src: song.picUrl,
               title: song.name,
-              thumb: song.picUrl,
-              thumbSize: "lg",
-              note: common_vendor.unref(common_util.singer)(song.singer)
+              content: common_vendor.unref(common_util.singer)(song.singer)
             })
           };
         }),
-        f: common_vendor.p({
-          border: false
-        }),
-        g: common_vendor.unref(songInfo)
-      }, common_vendor.unref(songInfo) ? {} : {}, {
-        h: common_vendor.unref(songInfo) ? 1 : ""
-      });
+        f: common_vendor.unref(songInfo) ? 1 : ""
+      };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "E:/UniApp/cloudMusic/cloudMusicApp/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

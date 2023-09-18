@@ -28,5 +28,5 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-0ca4bcdb"], ["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/components/rank-header/rank-header.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-0ca4bcdb"], ["__file", "E:/UniApp/cloudMusic/cloudMusicApp/components/rank-header/rank-header.vue"]]);
 wx.createComponent(Component);

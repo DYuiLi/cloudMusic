@@ -1,13 +1,16 @@
 <template>
 	<view class="my">
 		<!-- 自定义头部 -->
-		<custom-header class="cheader">
-			<template v-slot:body>
+		<custom-header @show="isShowDrawer = !isShowDrawer" class="cheader">
+			
+			<template v-slot:middle>
 				<view class="cheader-body"></view>
 			</template>
-			<template v-slot:foot>
+			
+			<template v-slot:right>
 				<text class="iconfont icon-search cheader-foot"></text>
 			</template>
+			
 		</custom-header>
 		<!-- 个人信息部分 -->
 		<view class="avatar">
@@ -105,6 +108,7 @@
 			</view>
 		</view>
 		<play-shortcut></play-shortcut>
+		<drawer v-if="isShowDrawer" @hide="isShowDrawer = !isShowDrawer"/>
 	</view>
 </template>
 
@@ -123,9 +127,12 @@
 	]);
 	const username = ref('Yui_Lii');
 	
+	let isShowDrawer = ref(false);
+	
 </script>
 
 <style lang="scss">
+	@import '@/common/common.scss';
 	
 	%header {
 		padding-top: 3px;

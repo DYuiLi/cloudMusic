@@ -7,7 +7,7 @@ const reqRecmdList = () => {
   return common_request.requests({ url: "personalized?limit=5", method: "GET" });
 };
 const reqRecmdSong = () => {
-  return common_request.requests({ url: "personalized/newsong?limit=5", method: "GET" });
+  return common_request.requests({ url: "personalized/newsong?limit=7", method: "GET" });
 };
 const reqRank = () => {
   return common_request.requests({ url: "toplist", method: "GET" });

@@ -34,5 +34,5 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/components/play-shortcut/play-shortcut.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/UniApp/cloudMusic/cloudMusicApp/components/play-shortcut/play-shortcut.vue"]]);
 wx.createComponent(Component);

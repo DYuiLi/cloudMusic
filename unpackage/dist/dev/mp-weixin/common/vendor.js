@@ -14,38 +14,6 @@ function makeMap(str, expectsLowerCase) {
   }
   return expectsLowerCase ? (val) => !!map[val.toLowerCase()] : (val) => !!map[val];
 }
-function normalizeStyle(value) {
-  if (isArray(value)) {
-    const res = {};
-    for (let i = 0; i < value.length; i++) {
-      const item = value[i];
-      const normalized = isString(item) ? parseStringStyle(item) : normalizeStyle(item);
-      if (normalized) {
-        for (const key in normalized) {
-          res[key] = normalized[key];
-        }
-      }
-    }
-    return res;
-  } else if (isString(value)) {
-    return value;
-  } else if (isObject$1(value)) {
-    return value;
-  }
-}
-const listDelimiterRE = /;(?![^(]*\))/g;
-const propertyDelimiterRE = /:([^]+)/;
-const styleCommentRE = /\/\*.*?\*\//gs;
-function parseStringStyle(cssText) {
-  const ret = {};
-  cssText.replace(styleCommentRE, "").split(listDelimiterRE).forEach((item) => {
-    if (item) {
-      const tmp = item.split(propertyDelimiterRE);
-      tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
-    }
-  });
-  return ret;
-}
 function normalizeClass(value) {
   let res = "";
   if (isString(value)) {
@@ -1266,8 +1234,8 @@ function populateParameters(fromRes, toRes) {
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.8.4",
-    uniRuntimeVersion: "3.8.4",
+    uniCompileVersion: "3.8.12",
+    uniRuntimeVersion: "3.8.12",
     uniPlatform: "mp-weixin",
     deviceBrand,
     deviceModel: model,
@@ -1498,7 +1466,8 @@ const objectKeys = [
   "cloud",
   "serviceMarket",
   "router",
-  "worklet"
+  "worklet",
+  "__webpack_require_UNI_MP_PLUGIN__"
 ];
 const singlePageDisableKey = ["lanDebug", "router", "worklet"];
 const launchOption = wx.getLaunchOptionsSync ? wx.getLaunchOptionsSync() : null;
@@ -1509,17 +1478,13 @@ function isWxKey(key) {
   return objectKeys.indexOf(key) > -1 || typeof wx[key] === "function";
 }
 function initWx() {
-  let global2 = wx;
-  if (typeof globalThis !== "undefined" && globalThis.wx && wx !== globalThis.wx) {
-    global2 = globalThis.wx;
-  }
   const newWx = {};
-  for (const key in global2) {
+  for (const key in wx) {
     if (isWxKey(key)) {
-      newWx[key] = global2[key];
+      newWx[key] = wx[key];
     }
   }
-  if (typeof globalThis !== "undefined") {
+  if (typeof globalThis !== "undefined" && typeof requireMiniProgram === "undefined") {
     globalThis.wx = newWx;
   }
   return newWx;
@@ -3330,8 +3295,8 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       warn(`watch() "deep" option is only respected when using the watch(source, callback, options?) signature.`);
     }
   }
-  const warnInvalidSource = (s2) => {
-    warn(`Invalid watch source: `, s2, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
+  const warnInvalidSource = (s) => {
+    warn(`Invalid watch source: `, s, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
   };
   const instance = getCurrentScope() === (currentInstance === null || currentInstance === void 0 ? void 0 : currentInstance.scope) ? currentInstance : null;
   let getter;
@@ -3345,21 +3310,21 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
     deep = true;
   } else if (isArray(source)) {
     isMultiSource = true;
-    forceTrigger = source.some((s2) => isReactive(s2) || isShallow(s2));
-    getter = () => source.map((s2) => {
-      if (isRef(s2)) {
-        return s2.value;
-      } else if (isReactive(s2)) {
-        return traverse(s2);
-      } else if (isFunction(s2)) {
+    forceTrigger = source.some((s) => isReactive(s) || isShallow(s));
+    getter = () => source.map((s) => {
+      if (isRef(s)) {
+        return s.value;
+      } else if (isReactive(s)) {
+        return traverse(s);
+      } else if (isFunction(s)) {
         return callWithErrorHandling(
-          s2,
+          s,
           instance,
           2
           /* ErrorCodes.WATCH_GETTER */
         );
       } else {
-        warnInvalidSource(s2);
+        warnInvalidSource(s);
       }
     });
   } else if (isFunction(source)) {
@@ -6052,26 +6017,9 @@ function findScopedSlotInvoker(vueId, instance) {
     parent = parent.parent;
   }
 }
-function stringifyStyle(value) {
-  if (isString(value)) {
-    return value;
-  }
-  return stringify(normalizeStyle(value));
-}
-function stringify(styles) {
-  let ret = "";
-  if (!styles || isString(styles)) {
-    return ret;
-  }
-  for (const key in styles) {
-    ret += `${key.startsWith(`--`) ? key : hyphenate(key)}:${styles[key]};`;
-  }
-  return ret;
-}
 const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
 const r = (name, props, key) => renderSlot(name, props, key);
-const s = (value) => stringifyStyle(value);
 const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
@@ -6470,14 +6418,18 @@ function initDefaultProps(options, isBehavior = false) {
   }
   if (options.behaviors) {
     if (options.behaviors.includes("wx://form-field")) {
-      properties.name = {
-        type: null,
-        value: ""
-      };
-      properties.value = {
-        type: null,
-        value: ""
-      };
+      if (!options.properties || !options.properties.name) {
+        properties.name = {
+          type: null,
+          value: ""
+        };
+      }
+      if (!options.properties || !options.properties.value) {
+        properties.value = {
+          type: null,
+          value: ""
+        };
+      }
     }
   }
   return properties;
@@ -7577,6 +7529,7 @@ const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
 };
 const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
 const onUnload = /* @__PURE__ */ createHook(ON_UNLOAD);
+const onPageScroll = /* @__PURE__ */ createHook(ON_PAGE_SCROLL);
 exports._export_sfc = _export_sfc;
 exports.computed = computed;
 exports.createSSRApp = createSSRApp;
@@ -7584,17 +7537,18 @@ exports.createStore = createStore;
 exports.e = e;
 exports.f = f;
 exports.index = index;
+exports.isRef = isRef;
 exports.n = n;
 exports.o = o;
 exports.onLoad = onLoad;
 exports.onMounted = onMounted;
+exports.onPageScroll = onPageScroll;
 exports.onUnload = onUnload;
 exports.p = p;
 exports.r = r;
 exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
-exports.s = s;
 exports.t = t;
 exports.toRefs = toRefs;
 exports.unref = unref;

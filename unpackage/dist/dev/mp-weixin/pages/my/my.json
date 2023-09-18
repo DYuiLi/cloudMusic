@@ -2,6 +2,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "custom-header": "../../components/custom-header/custom-header",
-    "play-shortcut": "../../components/play-shortcut/play-shortcut"
+    "play-shortcut": "../../components/play-shortcut/play-shortcut",
+    "drawer": "../../components/drawer/drawer"
   }
 }

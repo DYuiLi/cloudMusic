@@ -5,7 +5,7 @@ if (!Array) {
   const _easycom_yui_progress2 = common_vendor.resolveComponent("yui-progress");
   _easycom_yui_progress2();
 }
-const _easycom_yui_progress = () => "../yui-progress/yui-progress.js";
+const _easycom_yui_progress = () => "../../components/yui-progress/yui-progress.js";
 if (!Math) {
   _easycom_yui_progress();
 }
@@ -78,5 +78,5 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/components/play-footer/play-footer.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/UniApp/cloudMusic/cloudMusicApp/pages/play/play-footer.vue"]]);
 wx.createComponent(Component);

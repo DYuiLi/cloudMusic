@@ -35,9 +35,7 @@ function requests(options = {}){
 		
 		uni.request(options);
 		
-		// #ifdef MP-WEIXIN
-		wx.request(options);
-		// #endif
+		
 	});
 }
 

@@ -3,14 +3,13 @@ const common_vendor = require("../../common/vendor.js");
 const common_util = require("../../common/util.js");
 if (!Array) {
   const _easycom_rank_header2 = common_vendor.resolveComponent("rank-header");
-  const _easycom_play_footer2 = common_vendor.resolveComponent("play-footer");
-  (_easycom_rank_header2 + _easycom_play_footer2)();
+  _easycom_rank_header2();
 }
 const _easycom_rank_header = () => "../../components/rank-header/rank-header.js";
-const _easycom_play_footer = () => "../../components/play-footer/play-footer.js";
 if (!Math) {
-  (_easycom_rank_header + _easycom_play_footer)();
+  (_easycom_rank_header + PlayFooter)();
 }
+const PlayFooter = () => "./play-footer.js";
 const _sfc_main = {
   __name: "play",
   setup(__props) {
@@ -23,6 +22,24 @@ const _sfc_main = {
         playOrPause(status);
       });
       playMusic(option.id);
+    });
+    function playOrPause(play) {
+      if (play) {
+        audioContext.play();
+      } else {
+        audioContext.pause();
+      }
+    }
+    function resetCurrentTime(current) {
+      audioContext.currentTime = current;
+    }
+    audioContext.onPlay(() => {
+      rotate.value = true;
+      common_vendor.index.$emit("playing", audioContext);
+    });
+    audioContext.onPause(() => {
+      rotate.value = false;
+      common_vendor.index.$emit("paused");
     });
     function playMusic(id) {
       const detail = store.dispatch("rank/getSingleDetailById", id);
@@ -40,14 +57,6 @@ const _sfc_main = {
         console.log(err);
       });
     }
-    audioContext.onPlay(() => {
-      rotate.value = true;
-      common_vendor.index.$emit("playing", audioContext);
-    });
-    audioContext.onPause(() => {
-      rotate.value = false;
-      common_vendor.index.$emit("paused");
-    });
     function switchSong(index, crtID) {
       const songs = tracks.value;
       let currentIndex = songs.findIndex((val) => val.id == crtID) + index;
@@ -64,18 +73,32 @@ const _sfc_main = {
     const tracks = common_vendor.computed(() => {
       return store.getters["rank/listTracks"];
     });
-    const doms = {
-      lrcObj: document.getElementsByClassName("lyrics"),
-      ctnrObj: document.getElementsByClassName("container")
-    };
+    const doms = {};
     let lrcHeight, containerHeight, textHeight, maxOffset;
-    setTimeout(() => {
-      lrcHeight = doms.lrcObj[0].clientHeight;
-      containerHeight = doms.ctnrObj[0].clientHeight;
-      textHeight = doms.ctnrObj[0].children[0].clientHeight;
+    common_vendor.onMounted(() => {
+      doms.lrcObj = common_vendor.index.createSelectorQuery().in(this).select(".lyrics");
+      doms.ctnrObj = common_vendor.index.createSelectorQuery().in(this).select(".container");
+      doms.textObj = common_vendor.index.createSelectorQuery().in(this).select(".text");
+      doms.lrcObj.boundingClientRect((e) => {
+        lrcHeight = e.height;
+      }).exec();
+      doms.ctnrObj.boundingClientRect((e) => {
+        containerHeight = e.height;
+      }).exec();
+      doms.textObj.boundingClientRect((e) => {
+        textHeight = e.height;
+      }).exec();
       maxOffset = containerHeight - lrcHeight;
-    }, 1e3);
+    });
     let lyricIndex = common_vendor.ref(0);
+    function getIndex() {
+      for (let i = 0; i < finalLrc.value.length - 1; i++) {
+        if (finalLrc.value[i].time > audioContext.currentTime) {
+          return i - 1;
+        }
+      }
+      return finalLrc.value.length - 1;
+    }
     audioContext.onTimeUpdate(() => {
       lyricIndex.value = getIndex();
       let offset = textHeight * lyricIndex.value + textHeight / 2 - lrcHeight / 2;
@@ -84,26 +107,9 @@ const _sfc_main = {
       if (offset > maxOffset)
         offset = maxOffset;
       doms.ctnrObj[0].style.transform = `translateY(-${offset}px)`;
+      if (audioContext.currentTime == audioContext.duration)
+        switchSong(1, common_util.getSessionInfo("songInfo").id);
     });
-    function getIndex() {
-      const currentTime = audioContext.currentTime;
-      for (let i = 0; i < finalLrc.value.length - 1; i++) {
-        if (finalLrc.value[i].time > currentTime) {
-          return i - 1;
-        }
-      }
-      return finalLrc.value.length - 1;
-    }
-    function playOrPause(play) {
-      if (play) {
-        audioContext.play();
-      } else {
-        audioContext.pause();
-      }
-    }
-    function resetCurrentTime(current) {
-      audioContext.currentTime = current;
-    }
     const lyric = common_vendor.computed(() => {
       return store.state.rank.singleLyrics;
     });
@@ -147,22 +153,27 @@ const _sfc_main = {
           };
         }),
         g: common_vendor.o(showLyrics)
-      } : {
-        h: common_vendor.f(common_vendor.unref(finalLrc), (ly, index, i0) => {
+      } : common_vendor.e({
+        h: doms.ctnrObj
+      }, doms.ctnrObj ? {
+        i: common_vendor.f(common_vendor.unref(finalLrc), (ly, index, i0) => {
           return {
             a: common_vendor.t(ly.lyric),
             b: index
           };
         }),
-        i: common_vendor.o(showLyrics)
-      }, {
-        j: common_vendor.o(resetCurrentTime),
-        k: common_vendor.p({
+        j: common_vendor.o(showLyrics)
+      } : {}), {
+        k: common_vendor.t(_ctx.ly.a),
+        l: _ctx.ly.b,
+        m: common_vendor.o((...args) => _ctx.j && _ctx.j(...args)),
+        n: common_vendor.o(resetCurrentTime),
+        o: common_vendor.p({
           time: common_vendor.unref(singleUrl).time
         })
       });
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/WebVue/uniApp/cloudMusic/cloudMusicApp/pages/play/play.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/UniApp/cloudMusic/cloudMusicApp/pages/play/play.vue"]]);
 wx.createPage(MiniProgramPage);

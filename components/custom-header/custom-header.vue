@@ -1,47 +1,34 @@
 <template>
-	<!-- #ifdef MP-WEIXIN -->
-	<!-- 垫高微信小程序头部导航部分高度 -->
-	<view class="miniP"></view>
-	<!-- #endif -->
 	<view class="container">
 		<!-- <slot></slot>标签中表示默认内容 -->
+		<!-- #ifndef MP -->
 		<slot>
-			<text class="iconfont icon-more header" @click="showDrawer"></text>
+			<text class="iconfont icon-more left" @click="showDrawer"></text>
 		</slot>
-		<slot name="body" class="body"></slot>
-		<slot name="foot" class="footer"></slot>
+		<!-- #endif -->
+		
+		<slot name="middle" class="middle"></slot>
+		<!-- #ifndef MP -->
+		<slot name="right" class="right"></slot>
+		<!-- #endif -->
 	</view>
 </template>
 
-<script>
+<script setup>
 	
-	export default {
-		
-		emits: ['show'],
-		
-		setup(props, context) {
-			
-			function showDrawer(){
-				context.emit('show');
-			}
-			
-			return {
-				showDrawer
-			};
-		}
+	const emits = defineEmits(['show']);
+	
+	function showDrawer() {
+		emits('show');
 	}
+	
 </script>
 
 <style lang="scss">
-	$mini-padding: 70px 15px 10px;
-	$normal-padding: 30px 15px 10px;
-	
-	.miniP {
-		width: 100%;
-		height: 30px;
-	}
+	@import '@/common/common.scss';
 	
 	.container {
+		
 		display: flex;
 		justify-content: space-between;
 		
@@ -51,15 +38,18 @@
 		right: 0;
 		top: 0;
 		box-sizing: border-box;
-		
 		background-color: #fff;
-		padding: $normal-padding;
+		@include padding(30px, 15px, 10px);
 		
-		.body {
-			flex: 1;
-		}
-		.header, 
-		.footer {
+		/* #ifdef MP */
+		
+		@include padding(70px, 15px, 10px);		// 避免小程序默认按键遮挡
+		justify-content: space-around;
+		
+		/* #endif*/
+		
+		.left, 
+		.right {
 			width: 30px;
 		}
 	}

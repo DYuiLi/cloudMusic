@@ -1,15 +1,17 @@
 <template>
 	<view class="index" :class="{indexBottom: songInfo}">
-		<!-- 搜搜头部 -->
-		<custom-header @show="showMore" class="header">
-			<template v-slot:body>
-				<!-- <text class="iconfont icon-search"></text> -->
+		<!-- 头部组件 由left、middle、right三部分构成-->
+		<custom-header @show="isShowDrawer = !isShowDrawer" class="header">
+			<!-- middle -->
+			<template v-slot:middle>
 				<input type="text" placeholder="我记得-赵雷">
 			</template>
-			<template v-slot:foot>
+			<!-- right -->
+			<template v-slot:right>
 				<text class="iconfont icon-micphone"></text>
 			</template>
 		</custom-header>
+		
 		<!-- uni-app原生轮播图 -->
 		<swiper indicator-dots="true" circular="true" class="banner">
 			<swiper-item v-for="(slide, index) in banner" :key="index">
@@ -52,9 +54,9 @@
 		</view>
 		<!-- 抽屉 -->
 		<!-- #ifndef MP-WEIXIN -->
-		<Drawer v-if="showDrawer" @hide="hideDrawer"/>
-		<!-- #endif -->
+		<drawer v-if="isShowDrawer" @hide="isShowDrawer = !isShowDrawer"/>
 		<play-shortcut v-if="songInfo"></play-shortcut>
+		<!-- #endif -->
 	</view>
 </template>
 
@@ -63,7 +65,6 @@
 	import { useStore } from 'vuex';
 	import { onLoad } from "@dcloudio/uni-app";
 	import { getSessionInfo, singer, goListDetail, getHot } from '@/common/util.js';
-	import Drawer from '@/pages/index/drawer.vue';
 	
 	const store = useStore();
 	
@@ -75,7 +76,9 @@
 		// console.log("recmdSongSlight:", recmdSongSlight);
 	});
 	
+	// 获取页面播放音乐后的session缓存 
 	let songInfo = reactive(getSessionInfo('songInfo') || {});
+	
 	
 	/* 轮播图接口数据 */
 	const { banner, recmdList } = toRefs(store.state.index);
@@ -118,13 +121,8 @@
 			des: "歌单"
 		}
 	]);
-	let showDrawer = ref(false);
-	function showMore() {
-		showDrawer.value = true;
-	}
-	function hideDrawer() {
-		showDrawer.value = false;
-	}
+	
+	let isShowDrawer = ref(false);		// 为true打开抽屉
 	
 	/* 分类路由跳转函数 */
 	function rankList() {
@@ -152,13 +150,24 @@
 </script>
 
 <style lang="scss" scoped>
+	@import '@/common/common.scss';
+	
 	.index {
-		padding: 80px 15px 0;
+		@include padding(80px, 15px, 0px);
+		background-color: #fff;
+		
+		/* #ifdef MP */
+		@include padding(120px, 15px, 0px);
+		/* #endif */
+		
 		.header {
 			background-color: #fff;
 
 			input {
 				width: 70%;
+				/* #ifdef MP */
+				width: 95%;
+				/* #endif */
 				height: 30px;
 				box-sizing: border-box;
 				background-color: #eee;

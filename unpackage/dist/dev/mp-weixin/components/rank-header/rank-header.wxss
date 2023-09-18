@@ -29,6 +29,7 @@
   left: 0;
   right: 0;
   z-index: 999;
+  background-color: inherit;
   padding: 10px 15px 0;
 }
 .nav .navBar.data-v-0ca4bcdb {

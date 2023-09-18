@@ -2,8 +2,6 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "custom-header": "../../components/custom-header/custom-header",
-    "uni-list-item": "../../uni_modules/uni-list/components/uni-list-item/uni-list-item",
-    "uni-list": "../../uni_modules/uni-list/components/uni-list/uni-list",
-    "play-shortcut": "../../components/play-shortcut/play-shortcut"
+    "list": "../../components/list/list"
   }
 }

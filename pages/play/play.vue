@@ -1,7 +1,7 @@
 <template>
 	<!-- 模糊背景 -->
 	<view>
-		<view class="blurbg" :style="{backgroundImage: `url(${singleDetail.picUrl})`}"></view>
+		<view class="blur-bg" :style="{backgroundImage: `url(${singleDetail.picUrl})`}"></view>
 		<rank-header :pageName="{name:singleDetail.name, singer: singleDetail.singer}" class="header"></rank-header>
 		<view class="content">
 			<!-- 显示播放封面 -->
@@ -10,12 +10,12 @@
 				<!-- 封面歌词-滚动效果 -->
 				<view class="lyrics" @click="showLyrics" >
 					<view class="container">
-						<text v-for="(lrc, index) in finalLrc" :key="index" :class="{active: lyricIndex === index}" >{{ lrc.lyric }}</text>
+						<text class="text" v-for="(lrc, index) in finalLrc" :key="index" :class="{active: lyricIndex === index}" >{{ lrc.lyric }}</text>
 					</view> 
 				</view>
 			</view>
 			<!-- 显示歌词 -->
-			<view class="fulllyrics" v-else @click="showLyrics">
+			<view class="fulllyrics" v-else @click="showLyrics" v-if="doms.ctnrObj">
 				<text v-for="(ly, index) in finalLrc" :key="index">{{ly.lyric}}</text>
 				<!-- <view class="container">   歌词滚动
 					<text v-for="(ly, index) in finalLrc" :key="index" :class="{active: lyricIndex === index}">{{ly.lyric}}</text>
@@ -28,8 +28,8 @@
 </template>
 
 <script setup>
-	import { toRefs, computed, ref } from 'vue';
-	import { onLoad, onUnload } from '@dcloudio/uni-app';
+	import { toRefs, computed, ref, onMounted } from 'vue';
+	import { onLoad, onUnload, onInit, onReady } from '@dcloudio/uni-app';
 	import { useStore} from 'vuex';
 	import { getSessionInfo, timeFormat } from '@/common/util.js';
 	import PlayFooter from '@/pages/play/play-footer.vue'
@@ -118,20 +118,66 @@
 		return store.getters['rank/listTracks'];
 	});
 	
+	/*onMounted(() => {		
+		
+		// 获取DOM元素对象
+		doms.lrcObj = uni.createSelectorQuery().in(this).select('.lyrics');
+		doms.ctnrObj = uni.createSelectorQuery().in(this).select('.container');
+		doms.textObj = uni.createSelectorQuery().in(this).select('.text');
+		
+		// let lrcHeight, containerHeight, textHeight, maxOffset;
+		doms.lrcObj.boundingClientRect(e => {
+			lrcHeight = e.height;
+		}).exec();
+		doms.ctnrObj.boundingClientRect(e => {
+			containerHeight = e.height;
+		}).exec();
+		doms.textObj.boundingClientRect(e => {
+			textHeight = e.height;
+		}).exec();
+		maxOffset = containerHeight - lrcHeight;
+		
+		// 当前歌曲播放进度监听
+		audioContext.onTimeUpdate(() => {
+			lyricIndex.value = getIndex();
+			let offset= textHeight * lyricIndex.value + textHeight/2 - lrcHeight/2
+			if(offset < 0) offset = 0;
+			if(offset > maxOffset) offset = maxOffset;
+			doms.ctnrObj[0].style.transform = `translateY(-${offset}px)`;
+			
+			// 当前歌曲播放结束，自动切换下一首
+			if(audioContext.currentTime == audioContext.duration) switchSong(1, getSessionInfo('songInfo').id);
+		});
+	});*/
+	
 	/* 歌词滚动-播放进度更新事件 */	
-	const doms = {
-		lrcObj: document.getElementsByClassName('lyrics'),
-		ctnrObj: document.getElementsByClassName('container')
-	}
-	
+	const doms = {	};	
 	let lrcHeight, containerHeight, textHeight, maxOffset;					// DOM元素高度和最大偏移量
-	
-	setTimeout(() => {
+	/*
+	setTimeout(() => {		
 		lrcHeight = doms.lrcObj[0].clientHeight;
 		containerHeight = doms.ctnrObj[0].clientHeight;
 		textHeight = doms.ctnrObj[0].children[0].clientHeight;
 		maxOffset = containerHeight - lrcHeight;
 	}, 1000);
+	*/
+	
+	onMounted(() => {
+		doms.lrcObj = uni.createSelectorQuery().in(this).select('.lyrics');
+		doms.ctnrObj = uni.createSelectorQuery().in(this).select('.container');
+		doms.textObj = uni.createSelectorQuery().in(this).select('.text');
+		
+		doms.lrcObj.boundingClientRect(e => {
+			lrcHeight = e.height;
+		}).exec();
+		doms.ctnrObj.boundingClientRect(e => {
+			containerHeight = e.height;
+		}).exec();
+		doms.textObj.boundingClientRect(e => {
+			textHeight = e.height;
+		}).exec();
+		maxOffset = containerHeight - lrcHeight;
+	});
 	
 	let lyricIndex = ref(0);
 	
@@ -186,17 +232,8 @@
 </script>
 
 <style lang="scss">
-	/* 模糊背景 */
-	.blurbg {
-		position: fixed;
-		padding: 50px 0;
-		width: 100%;
-		height: 570px;
-		background-size: cover;
-		background-position: center 0;
-		filter: blur(30px);
-		scale: (1.2);						// 去掉毛玻璃产生的白边
-	}
+	@import '@/common/common.scss';
+	
 	.header {
 		border: none;			// 去除custom-header默认边框样式
 		color: #fff;

@@ -2,6 +2,6 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "rank-header": "../../components/rank-header/rank-header",
-    "play-footer": "../../components/play-footer/play-footer"
+    "play-footer": "./play-footer"
   }
 }
