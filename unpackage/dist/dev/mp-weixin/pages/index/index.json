@@ -1,7 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "custom-header": "../../components/custom-header/custom-header",
-    "list": "../../components/list/list"
-  }
-}

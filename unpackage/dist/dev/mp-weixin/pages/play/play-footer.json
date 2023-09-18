@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "yui-progress": "../../components/yui-progress/yui-progress"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "rank-header": "../../components/rank-header/rank-header",
-    "play-shortcut": "../../components/play-shortcut/play-shortcut"
-  }
-}

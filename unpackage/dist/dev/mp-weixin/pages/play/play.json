@@ -1,7 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "rank-header": "../../components/rank-header/rank-header",
-    "play-footer": "./play-footer"
-  }
-}

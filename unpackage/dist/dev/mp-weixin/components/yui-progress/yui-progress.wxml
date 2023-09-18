@@ -1,1 +1,0 @@
-<view class="progress"><view id="bgd" class="background" bindtouchstart="{{b}}" bindtouchend="{{c}}"><view class="real" style="{{'width:' + a}}"></view></view><view class="dot" style="{{'left:' + d}}" bindtouchmove="{{e}}"></view></view>

@@ -1,1 +1,0 @@
-<view class="container"><slot name="middle"></slot></view>
